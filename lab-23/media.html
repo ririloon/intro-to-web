@@ -3,24 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Media Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            margin-top: 20px;
+        }
+        .media-section {
+            margin: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #ddd;
+            border-radius: 10px;
+        }
+        audio, video {
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        audio {
+            width: 100%;
+            max-width: 600px;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        .content-container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Multimedia Page</h1>
 
-<h2>Image Section</h2>
-<img src="landscape.jpg" alt="A scenic landscape" width="500">
+<div class="content-container">
 
-<h2>Audio Section</h2>
-<audio controls>
-    <source src="music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+    <h2>Image Section</h2>
+    <div class="media-section">
+        <img src="cat.jpg" alt="A black cat" width="500">
+    </div>
 
-<h2>Video Section</h2>
-<video controls width="600" poster="video-thumbnail.jpg">
-    <source src="video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+    <h2>Audio Section</h2>
+    <div class="media-section">
+        <audio controls>
+            <source src="lofi.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <h2>Video Section</h2>
+    <div class="media-section">
+        <video controls width="600" poster="new-video-thumbnail.jpg">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video controls width="600" poster="new-video-thumbnail2.jpg">
+            <source src="video2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+</div>
+
 </body>
 </html>
