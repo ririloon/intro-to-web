@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Property</title>
+    <style>
+        .block {
+            display: block;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            margin-bottom: 10px;
+        }
+
+        .inline {
+            display: inline;
+            background-color: lightcoral;
+            padding: 10px;
+        }
+
+        .inline-block {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            background-color: lightgreen;
+            margin: 5px;
+        }
+
+        .none {
+            display: none; /* Hides the element */
+        }
+    </style>
+</head>
+<body>
+    <h2>Block Element</h2>
+    <div class="block">This is a block element.</div>
+
+    <h2>Inline Elements</h2>
+    <span class="inline">This is an inline element.</span>
+    <span class="inline">This is another inline element.</span>
+
+    <h2>Inline-Block Elements</h2>
+    <div class="inline-block">This is an inline-block element.</div>
+    <div class="inline-block">This is another inline-block element.</div>
+
+    <h2>Hidden Element</h2>
+    <div class="none">You can't see me!</div>
+</body>
+</html>

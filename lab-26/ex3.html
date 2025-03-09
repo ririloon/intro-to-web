@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Shadow</title>
+    <style>
+        h1 {
+            font-size: 40px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .shadow-red {
+            text-shadow: 4px 4px 6px rgba(255, 0, 0, 0.7);
+        }
+
+        .shadow-blue {
+            text-shadow: -3px -3px 4px blue;
+        }
+
+        .shadow-multiple {
+            text-shadow: 2px 2px 3px black, -2px -2px 3px red;
+        }
+    </style>
+</head>
+<body>
+<h1>Default Shadow</h1>
+<h1 class="shadow-red">Red Shadow</h1>
+<h1 class="shadow-blue">Blue Shadow</h1>
+<h1 class="shadow-multiple">Multiple Shadows</h1>
+</body>
+</html>
