@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter name"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter email"><br><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" placeholder="Enter age"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let age = document.getElementById("age").value;
+
+            let emailPattern = /^([a-zA-Z0-9._-]+)@([a-zA-Z0-9._-]+)\.([a-zA-Z]{2,5})$/;
+
+            if (name.trim() === "" || email.trim() === "" || age.trim() === "") {
+                alert("All fields are required!");
+                return;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Invalid email format!");
+                return;
+            }
+
+            if (isNaN(age) || age <= 0) {
+                alert("Age must be a valid positive number!");
+                return;
+            }
+
+            document.getElementById("result").innerText = "Form submitted successfully!";
+        });
+    </script>
+</body>
+</html>

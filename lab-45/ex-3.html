@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch Random Joke</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          text-align: center;
+        }
+        button {
+          padding: 10px 20px;
+          margin-bottom: 20px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        p {
+          font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Random Joke</h1>
+<button id="get-joke">Get Joke</button>
+<p id="joke"></p>
+
+<script>
+    const button = document.getElementById('get-joke');
+    const jokeParagraph = document.getElementById('joke');
+
+    button.addEventListener('click', () => {
+      fetch('https://official-joke-api.appspot.com/random_joke')
+        .then(response => response.json())
+        .then(joke => {
+          jokeParagraph.textContent = `${joke.setup} - ${joke.punchline}`;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+</body>
+</html>

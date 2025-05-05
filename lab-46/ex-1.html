@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Basic Image Gallery</h1>
+<div class="gallery">
+  <img src="https://picsum.photos/id/1015/400/300" alt="Image 1">
+  <img src="https://picsum.photos/id/1016/400/300" alt="Image 2">
+  <img src="https://picsum.photos/id/1018/400/300" alt="Image 3">
+  <img src="https://picsum.photos/id/1020/400/300" alt="Image 4">
+</div>
+
+</body>
+</html>

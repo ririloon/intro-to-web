@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhancing UX with Animations & Transitions</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          padding: 20px;
+        }
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 15px;
+        }
+        .gallery img {
+          width: 100%;
+          border-radius: 10px;
+          transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+          transform: scale(1.1);
+        }
+        .modal {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.8);
+          justify-content: center;
+          align-items: center;
+          transition: opacity 0.5s ease;
+        }
+        .modal.show {
+          display: flex;
+          opacity: 1;
+        }
+        .modal img {
+          max-width: 80%;
+          border-radius: 10px;
+          animation: zoom 0.5s ease;
+        }
+        @keyframes zoom {
+          from {
+            transform: scale(0.7);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Enhanced Image Gallery</h1>
+<div class="gallery">
+    <img src="https://picsum.photos/id/1015/400/300" alt="Image 1">
+    <img src="https://picsum.photos/id/1016/400/300" alt="Image 2">
+    <img src="https://picsum.photos/id/1018/400/300" alt="Image 3">
+    <img src="https://picsum.photos/id/1020/400/300" alt="Image 4">
+</div>
+
+<div class="modal" id="modal">
+    <img id="modal-img" src="" alt="Modal Image">
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const images = document.querySelectorAll('.gallery img');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.classList.add('show');
+        modalImg.src = img.src;
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6e48aa, #9b59b6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            background: #f9f9f9;
+        }
+        input::placeholder {
+            color: #aaa;
+        }
+        button {
+            padding: 12px 20px;
+            background: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #7d3c98;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        li:hover {
+            background: #f1f1f1;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .edit-btn {
+            background: #007bff;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .delete-btn img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>TO DO LIST</h2>
+        <div class="container">
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Task to be done...">
+                <button id="addTask">Add</button>
+            </div>
+            <ul id="taskList"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Lab 1: Creating a Basic Task List
+        let taskInput = document.getElementById("taskInput");
+        let addTaskButton = document.getElementById("addTask");
+        let taskList = document.getElementById("taskList");
+
+        function createTask(taskText, isCompleted = false) {
+            let li = document.createElement("li");
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+            li.appendChild(taskSpan);
+            taskList.appendChild(li);
+        }
+
+        addTaskButton.onclick = function() {
+            let taskText = taskInput.value.trim();
+            if (taskText === "") {
+                alert("Task cannot be empty!");
+                return;
+            }
+
+            createTask(taskText);
+            taskInput.value = "";
+        };
+
+        // Lab 2: Adding and Deleting Tasks
+        function createTask(taskText, isCompleted = false) {
+            let li = document.createElement("li");
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            let deleteIcon = document.createElement("img");
+            deleteIcon.src = "https://img.icons8.com/ios-filled/50/8e44ad/trash.png";
+            deleteIcon.alt = "Delete";
+            deleteButton.appendChild(deleteIcon);
+            deleteButton.onclick = function() {
+                taskList.removeChild(li);
+            };
+
+            li.appendChild(taskSpan);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+        }
+
+        // Lab 3: Marking Tasks as Completed
+        function createTask(taskText, isCompleted = false) {
+            let li = document.createElement("li");
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+            if (isCompleted) li.classList.add("completed");
+
+            taskSpan.onclick = function() {
+                li.classList.toggle("completed");
+            };
+
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            let deleteIcon = document.createElement("img");
+            deleteIcon.src = "https://img.icons8.com/ios-filled/50/8e44ad/trash.png";
+            deleteIcon.alt = "Delete";
+            deleteButton.appendChild(deleteIcon);
+            deleteButton.onclick = function() {
+                taskList.removeChild(li);
+            };
+
+            li.appendChild(taskSpan);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+        }
+
+        // Lab 4: Saving Tasks to localStorage
+        function saveTasks() {
+            let tasks = [];
+            document.querySelectorAll("#taskList li").forEach(task => {
+                let taskText = task.querySelector("span").textContent;
+                let completed = task.classList.contains("completed");
+                tasks.push({ text: taskText, completed: completed });
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            let storedTasks = localStorage.getItem("tasks");
+            if (storedTasks) {
+                let tasks = JSON.parse(storedTasks);
+                tasks.forEach(task => {
+                    createTask(task.text, task.completed);
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadTasks);
+
+        addTaskButton.onclick = function() {
+            let taskText = taskInput.value.trim();
+            if (taskText === "") {
+                alert("Task cannot be empty!");
+                return;
+            }
+
+            createTask(taskText);
+            taskInput.value = "";
+            saveTasks();
+        };
+
+        function createTask(taskText, isCompleted = false) {
+            let li = document.createElement("li");
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+            if (isCompleted) li.classList.add("completed");
+
+            taskSpan.onclick = function() {
+                li.classList.toggle("completed");
+                saveTasks();
+            };
+
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            let deleteIcon = document.createElement("img");
+            deleteIcon.src = "https://img.icons8.com/ios-filled/50/8e44ad/trash.png";
+            deleteIcon.alt = "Delete";
+            deleteButton.appendChild(deleteIcon);
+            deleteButton.onclick = function() {
+                taskList.removeChild(li);
+                saveTasks();
+            };
+
+            li.appendChild(taskSpan);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+        }
+
+        // Lab 5: Editing Tasks
+        function createTask(taskText, isCompleted = false) {
+            let li = document.createElement("li");
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+            if (isCompleted) li.classList.add("completed");
+
+            // Add Edit button
+            let editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.className = "edit-btn";
+            editButton.onclick = function() {
+                let input = document.createElement("input");
+                input.type = "text";
+                input.value = taskSpan.textContent;
+                li.innerHTML = "";
+                li.appendChild(input);
+
+                input.focus();
+
+                input.onkeypress = function(e) {
+                    if (e.key === "Enter") {
+                        let newText = input.value.trim();
+                        if (newText === "") {
+                            alert("Task cannot be empty!");
+                            taskList.removeChild(li);
+                        } else {
+                            li.innerHTML = "";
+                            taskSpan.textContent = newText;
+                            li.appendChild(taskSpan);
+                            li.appendChild(editButton);
+                            li.appendChild(deleteButton);
+                            saveTasks();
+                        }
+                    }
+                };
+            };
+
+            // Add Delete button
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            let deleteIcon = document.createElement("img");
+            deleteIcon.src = "https://img.icons8.com/ios-filled/50/8e44ad/trash.png";
+            deleteIcon.alt = "Delete";
+            deleteButton.appendChild(deleteIcon);
+            deleteButton.onclick = function() {
+                taskList.removeChild(li);
+                saveTasks();
+            };
+
+            // Toggle completion on click
+            taskSpan.onclick = function() {
+                li.classList.toggle("completed");
+                saveTasks();
+            };
+
+            li.appendChild(taskSpan);
+            li.appendChild(editButton);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+        }
+    </script>
+</body>
+</html>
